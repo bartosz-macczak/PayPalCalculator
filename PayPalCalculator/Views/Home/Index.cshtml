@@ -1,0 +1,67 @@
+﻿@model PayPalCalculator.Models.Country
+@{ Layout = null;} 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PayPal Fees Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/flag-icon-css/css/flag-icon.min.css" />
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">PP Calc</a>
+
+        <div class="collapse navbar-collapse" id="navbars1">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="Index">PayPal Calculator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="PasswordGenerator">Password generator</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <form class="form-horizontal">
+        <fieldset>
+            <h2 align="center">PayPal Fee calculator</h2>
+
+            <div class="form-group" align="center">
+                <label class="col-md-4 control-label" for="radios">Choose country:</label>
+                <div class="col-md-4 ">
+                    @foreach (PayPalCalculator.Models.Country r in ViewBag.countryArray)
+                    {
+                        <label class="radio-inline" for="radios-0">
+                            <input type="radio" name="country" id="@r.CountryName" value="@r.CountryName" checked />
+                            @r.CountryName
+                            <label class="flag-icon-ng"></label>
+                        </label>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group" align="center">
+                <label class="col-md-4 control-label" for="textinput">Enter ammount:</label>
+                <div class="col-md-4">
+                    <input id="ammount" name="ammount" type="text" placeholder="0" class="form-control input-md">
+                </div>
+            </div>
+            <div align="center">
+                <input class="btn btn-primary" type="submit" value="Calculate" align="center" />
+            </div>
+            <br />
+            <h2 class="text-center">Results: </h2>
+
+        </fieldset>
+    </form>
+    <div class="form-group" align="center">
+        <p>If someone pay you @ViewBag.ammount @ViewBag.CurrencyName you receive @ViewBag.YouReceive @ViewBag.CurrencyName</p>
+        <p>If you want receive @ViewBag.ammount @ViewBag.CurrencyName you should ask for @ViewBag.YouAskFor @ViewBag.CurrencyName</p>
+    </div>
+    @ViewBag.country
+</body>
+</html>
